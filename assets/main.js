@@ -59,7 +59,7 @@ function clearElement() {
 }
 
 function shareText() {
-    const shareCode = document.getElementById('pwdInput').value;
+    const shareCode = document.getElementById('pwdInput').innerText;
     const qrcode = document.getElementById('qrcode');
     qrcode.style.display = '';
 
@@ -117,5 +117,5 @@ function generateRandomPassword(length) {
     }
 
     const pwdInput = document.getElementById("pwdInput");
-    pwdInput.value = password;
+    pwdInput.innerText = password;
 }

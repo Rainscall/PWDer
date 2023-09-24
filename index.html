@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://cdn.staticfile.org" />
+    <link rel="preconnect" href="https://lib.baomitu.com" />
     <meta name="google" content="notranslate">
     <meta name="format-detection" content="telephone=no" />
     <meta name="format-detection" content="telephone=no,email=no" />
@@ -40,21 +42,26 @@
             </div>
             <div class="childPart" style="min-height: 40px;background-color: #dddddd59;">
                 <div class="originInput">
-                    <textarea type="text" name="pwd" id="pwdInput" class="pwdInput" placeholder="Password"
-                        autocomplete="off"></textarea>
+                    <!--<textarea type="text" name="pwd" id="pwdInput" class="pwdInput" placeholder="Password"
+                        autocomplete="off"></textarea>-->
+                    <div class="forceDecyptResult">
+                        <div id="pwdInput">
+
+                        </div>
+                    </div>
                     <div class="inputRange">
                         <span class="inputRangeNotice">length:&nbsp;<span id="rangeValue">16</span></span>
-                        <input type="range" min="8" max="300" value="16" id="inputRange" />
+                        <input type="range" min="8" max="150" value="16" id="inputRange" step="1" />
                     </div>
                     <div class="opBar">
                         <div class="opBar noMargin">
-                            <a href="javascript:void(0);" onclick="copyToClipboard('pwdInput')"
-                                class="CS-fakeBtn-black" draggable="false">
+                            <a href="javascript:void(0);" onclick="copyInnerText('pwdInput')" class="CS-fakeBtn-black"
+                                draggable="false">
                                 <span><span style="color: #ffffff;" id="fakeUpBtnText">Copy</span>
                                 </span>
                             </a>
-                            <a href="javascript:void(0);" onclick="generateRandomPassword(inputRange.value);" class="CS-fakeBtn-black"
-                                draggable="false">
+                            <a href="javascript:void(0);" onclick="generateRandomPassword(inputRange.value);"
+                                class="CS-fakeBtn-black" draggable="false">
                                 <span><span style="color: #ffffff;" id="fakeUpBtnText">Retry</span>
                                 </span>
                             </a>
@@ -65,31 +72,28 @@
                             </a>
                         </div>
                     </div>
-                    <button id="Crypt" style="display: none;">Crypt</button>
-                    <button id="Decrypt" style="display: none;">Decrypt</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.staticfile.org/crypto-js/4.1.1/crypto-js.js"></script>
     <script src="https://cdn.staticfile.org/qrcodejs/1.0.0/qrcode.js"></script>
     <script src="https://cdn.staticfile.org/toastify-js/1.12.0/toastify.min.js"></script>
     <script>
         // 获取inputRange和rangeValue元素
         const inputRange = document.getElementById("inputRange");
         const rangeValue = document.getElementById("rangeValue");
-    
+
         // 添加事件监听器来监听inputRange值的变化
-        inputRange.addEventListener("input", function() {
-          // 将inputRange的值设置为rangeValue元素的innerText
-          rangeValue.innerText = inputRange.value;
-          generateRandomPassword(inputRange.value);
+        inputRange.addEventListener("input", function () {
+            // 将inputRange的值设置为rangeValue元素的innerText
+            rangeValue.innerText = inputRange.value;
+            generateRandomPassword(inputRange.value);
         });
 
-        window.onload = function() {
+        window.onload = function () {
             generateRandomPassword(16);
         };
-      </script>
+    </script>
     <script src="assets/main.js"></script>
 
 </body>
