@@ -1,0 +1,97 @@
+<html lang="en" translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="telephone=no,email=no" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>PWDer</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/toastify-js/1.12.0/toastify.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <div class="shareBasePart" id="shareBasePart" style="display: none;">
+        <div class="basePart">
+            <div class="mainPart" style="align-items: center;">
+                <div class="childPart QRCode">
+                    <div id="qrcode"></div>
+                    <div id="qrcodeError" style="display: none;"><span>Too long. Max: 940</span></div>
+                </div>
+                <div class="childPart closeQRCode">
+                    <div class="opBar noMargin">
+                        <a href="javascript:void(0);" onclick="closeQRCode()" class="CS-fakeBtn-black">
+                            <span><span style="color: #fff;" id="fakeUpBtnText">Close</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="basePart">
+        <div class="mainPart">
+            <div class="childPart" style="margin-bottom:0;">
+                <h1>
+                    <a href="/" style="color: #484848;">PWDer</a>
+                </h1>
+            </div>
+            <div class="childPart" style="min-height: 40px;background-color: #dddddd59;">
+                <div class="originInput">
+                    <textarea type="text" name="pwd" id="pwdInput" class="pwdInput" placeholder="Password"
+                        autocomplete="off"></textarea>
+                    <div class="inputRange">
+                        <span class="inputRangeNotice">length:&nbsp;<span id="rangeValue">16</span></span>
+                        <input type="range" min="8" max="300" value="16" id="inputRange" />
+                    </div>
+                    <div class="opBar">
+                        <div class="opBar noMargin">
+                            <a href="javascript:void(0);" onclick="copyToClipboard('pwdInput')"
+                                class="CS-fakeBtn-black" draggable="false">
+                                <span><span style="color: #ffffff;" id="fakeUpBtnText">Copy</span>
+                                </span>
+                            </a>
+                            <a href="javascript:void(0);" onclick="generateRandomPassword(inputRange.value);" class="CS-fakeBtn-black"
+                                draggable="false">
+                                <span><span style="color: #ffffff;" id="fakeUpBtnText">Retry</span>
+                                </span>
+                            </a>
+                            <a href="javascript:void(0);" onclick="shareText()" class="CS-fakeBtn-black"
+                                draggable="false">
+                                <span><span style="color: #ffffff;" id="fakeUpBtnText">Share</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <button id="Crypt" style="display: none;">Crypt</button>
+                    <button id="Decrypt" style="display: none;">Decrypt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.staticfile.org/crypto-js/4.1.1/crypto-js.js"></script>
+    <script src="https://cdn.staticfile.org/qrcodejs/1.0.0/qrcode.js"></script>
+    <script src="https://cdn.staticfile.org/toastify-js/1.12.0/toastify.min.js"></script>
+    <script>
+        // 获取inputRange和rangeValue元素
+        const inputRange = document.getElementById("inputRange");
+        const rangeValue = document.getElementById("rangeValue");
+    
+        // 添加事件监听器来监听inputRange值的变化
+        inputRange.addEventListener("input", function() {
+          // 将inputRange的值设置为rangeValue元素的innerText
+          rangeValue.innerText = inputRange.value;
+          generateRandomPassword(inputRange.value);
+        });
+
+        window.onload = function() {
+            generateRandomPassword(16);
+        };
+      </script>
+    <script src="assets/main.js"></script>
+
+</body>
+
+</html>
