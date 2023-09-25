@@ -1,18 +1,40 @@
 isE2R.onchange = function () {
     if (isE2R.checked) {
-        inputRange.max = 10;
-        inputRange.min = 2;
-        inputRange.value = 4;
-        rangeValue.innerText = inputRange.value;
-        generateRandomPassword(inputRange.value);
+        toggleInputRange(10, 2, 4);
+        toggleSymbolInput(false);
+    } else {
+        toggleInputRange(150, 8, 20);
+        toggleSymbolInput(true);
     }
-    if (!isE2R.checked) {
-        inputRange.max = 150;
-        inputRange.min = 8;
-        inputRange.value = 20;
-        rangeValue.innerText = inputRange.value;
-        generateRandomPassword(inputRange.value);
+    generateRandomPassword(inputRange.value);
+};
+
+isSymbol.onchange = function () {
+    if (isSymbol.checked) {
+        toggleE2RInput(false);
+    } else {
+        toggleE2RInput(true);
     }
+    generateRandomPassword(inputRange.value);
+};
+
+function toggleInputRange(maxValue, minValue, startValue) {
+    inputRange.max = maxValue;
+    inputRange.min = minValue;
+    inputRange.value = startValue;
+    rangeValue.innerText = inputRange.value;
+}
+
+function toggleSymbolInput(disable) {
+    isSymbol.disabled = disable ? "" : "disabled";
+    isSymbol.parentNode.style.textDecoration = disable ? "" : "line-through #adadad";
+    isSymbol.parentNode.lastElementChild.style.color = disable ? "" : "#adadad";
+}
+
+function toggleE2RInput(disable) {
+    isE2R.disabled = disable ? "" : "disabled";
+    isE2R.parentNode.style.textDecoration = disable ? "" : "line-through #adadad";
+    isE2R.parentNode.lastElementChild.style.color = disable ? "" : "#adadad";
 }
 
 function triggerButtonById(buttonId) {
