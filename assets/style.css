@@ -50,15 +50,21 @@
     font-family: 'Anonymous Pro';
     font-style: normal;
     font-weight: regular;
-    src: url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.eot'); /* IE9 Compat Modes */
+    src: url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.eot');
+    /* IE9 Compat Modes */
     src: local('Anonymous Pro'), local('AnonymousPro-Normal'),
-         url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.woff2') format('woff2'), /* Super Modern Browsers */
-         url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.woff') format('woff'), /* Modern Browsers */
-         url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.svg#AnonymousPro') format('svg'); /* Legacy iOS */
-  }
-    
+        url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.eot?#iefix') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.woff') format('woff'),
+        /* Modern Browsers */
+        url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('//lib.baomitu.com/fonts/anonymous-pro/anonymous-pro-regular.svg#AnonymousPro') format('svg');
+    /* Legacy iOS */
+}
+
 
 .basePart {
     display: flex;
@@ -113,14 +119,17 @@
     background-color: transparent;
     width: 500px;
 }
+
 [type="range"]::-webkit-slider-runnable-track {
     height: 4px;
     background: #d1d1d1;
 }
+
 [type="range" i]::-webkit-slider-container {
     height: 20px;
     overflow: hidden;
 }
+
 [type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -130,7 +139,7 @@
     background-color: #616161;
     border: 1px solid transparent;
     margin-top: -8px;
-    border-image: linear-gradient(#616161,#616161) 0 fill / 10 20 10 0 / 0px 0px 0 114514px;
+    border-image: linear-gradient(#616161, #616161) 0 fill / 10 20 10 0 / 0px 0px 0 114514px;
 }
 
 .originInput {
@@ -288,8 +297,8 @@ h4 {
 }
 
 #pwdInput {
-    word-break:break-all;
-    text-align:center;
+    word-break: break-all;
+    text-align: center;
     font-size: 1.1em;
     font-family: 'Anonymous Pro';
 }
@@ -297,4 +306,62 @@ h4 {
 .toastify {
     box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.217), 0 10px 36px -4px rgba(98, 98, 98, 0.171);
     border-radius: 8px;
+}
+
+[type="checkbox"] {
+    display: none;
+}
+
+label {
+    display: inline-block;
+    width: 15px;
+    height: 14.6px;
+    border-radius: 32px;
+    border: 1px solid #616161;
+    position: relative;
+    cursor: pointer;
+}
+
+label::before {
+    display: inline-block;
+    content: " ";
+    width: 7.5px;
+    border: 2px solid #fff;
+    height: 3px;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    top: 4px;
+    left: 2.7px;
+    position: absolute;
+    opacity: 0;
+}
+
+input:checked+label {
+    background: #1f1f1fad;
+}
+
+input:checked+label::before {
+    opacity: 1;
+    transform: all 0.5s;
+}
+
+.opChar {
+    margin: 8px 0 8px 4px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.opChar>span {
+    font-size: 0.9em;
+    margin-left: 0.3em;
+}
+
+.subLabel {
+    border: none;
+    height: 1.1em;
+    width: 4.5em;
+    position: absolute;
 }

@@ -89,8 +89,6 @@ function shareText() {
         return;
     }
 
-    //const encodedShareCode = encodeURIComponent(shareCode);
-    //const shareCodeUrl = `${window.location.href}?input=${encodedShareCode}`;
     new QRCode(qrcode, {
         'text': shareCode,
         'width': 256,
@@ -108,14 +106,61 @@ function closeQRCode() {
     document.getElementById('qrcodeError').style.display = 'none';
 }
 function generateRandomPassword(length) {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let password = "";
+    const isSymbol = document.getElementById('isSymbol');
+    const isE2R = document.getElementById('isE2R');
+    if (isSymbol.checked) {
+        charset += "@#$%&*";
+    }
 
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length);
-        password += charset.charAt(randomIndex);
+    if (isE2R.checked) {
+        password = generateRandomE2R(length);
+    }
+
+    if (!isE2R.checked) {
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            password += charset.charAt(randomIndex);
+        }
     }
 
     const pwdInput = document.getElementById("pwdInput");
     pwdInput.innerText = password;
+}
+
+function generateRandomE2R(paramCount) {
+    // 创建一个 XMLHttpRequest 对象用于从文件中获取字符集
+    var xhr = new XMLHttpRequest();
+
+    // 定义字符集变量
+    var charSet = '';
+
+    // 打开文件并发送请求
+    xhr.open('GET', 'assets/pwdDir.txt', false); // 同步请求
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            charSet = xhr.responseText;
+        }
+    };
+    xhr.send();
+
+    var words = charSet.split('\n').map(function (word) {
+        return word.trim();
+    });
+
+    // 创建一个用于存储随机选中的词的数组
+    var selectedWords = [];
+
+    // 从字符集中随机选取指定数量的词
+    for (var i = 0; i < paramCount; i++) {
+        var randomIndex = Math.floor(Math.random() * words.length);
+        selectedWords.push(words[randomIndex]);
+    }
+
+    // 使用 "-" 将选中的词拼接起来
+    var result = selectedWords.join('-');
+
+    // 返回拼接的字符串
+    return result;
 }

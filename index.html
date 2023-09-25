@@ -42,35 +42,46 @@
             </div>
             <div class="childPart" style="min-height: 40px;background-color: #dddddd59;">
                 <div class="originInput">
-                    <!--<textarea type="text" name="pwd" id="pwdInput" class="pwdInput" placeholder="Password"
-                        autocomplete="off"></textarea>-->
                     <div class="forceDecyptResult">
-                        <div id="pwdInput">
-
-                        </div>
+                        <div id="pwdInput"></div>
                     </div>
                     <div class="inputRange">
-                        <span class="inputRangeNotice">length:&nbsp;<span id="rangeValue">16</span></span>
-                        <input type="range" min="8" max="150" value="16" id="inputRange" step="1" />
+                        <span class="inputRangeNotice">length:&nbsp;<span id="rangeValue">20</span></span>
+                        <input type="range" min="8" max="150" value="20" id="inputRange" step="1" />
                     </div>
-                    <div class="opBar">
-                        <div class="opBar noMargin">
-                            <a href="javascript:void(0);" onclick="copyInnerText('pwdInput')" class="CS-fakeBtn-black"
-                                draggable="false">
-                                <span><span style="color: #ffffff;" id="fakeUpBtnText">Copy</span>
-                                </span>
-                            </a>
-                            <a href="javascript:void(0);" onclick="generateRandomPassword(inputRange.value);"
-                                class="CS-fakeBtn-black" draggable="false">
-                                <span><span style="color: #ffffff;" id="fakeUpBtnText">Retry</span>
-                                </span>
-                            </a>
-                            <a href="javascript:void(0);" onclick="shareText()" class="CS-fakeBtn-black"
-                                draggable="false">
-                                <span><span style="color: #ffffff;" id="fakeUpBtnText">Share</span>
-                                </span>
-                            </a>
+                    <div class="inputRange" style="margin-top: -4px;">
+                        <div class="opChar">
+                            <input type="checkbox" name="isSymbol" id="isSymbol">
+                            <label for="isSymbol"></label>
+                            <label for="isSymbol" class="subLabel"></label>
+                            <span>Symbol</span>
                         </div>
+                        <div class="opChar">
+                            <input type="checkbox" name="isE2R" id="isE2R">
+                            <label for="isE2R"></label>
+                            <label for="isE2R" class="subLabel" style="width: 9em;"></label>
+                            <span>Easy to remember</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chilePart noMargin">
+                <div class="opBar">
+                    <div class="opBar noMargin">
+                        <a href="javascript:void(0);" onclick="copyInnerText('pwdInput')" class="CS-fakeBtn-black"
+                            draggable="false">
+                            <span><span style="color: #ffffff;" id="fakeUpBtnText">Copy</span>
+                            </span>
+                        </a>
+                        <a href="javascript:void(0);" onclick="generateRandomPassword(inputRange.value);"
+                            class="CS-fakeBtn-black" draggable="false">
+                            <span><span style="color: #ffffff;" id="fakeUpBtnText">Retry</span>
+                            </span>
+                        </a>
+                        <a href="javascript:void(0);" onclick="shareText()" class="CS-fakeBtn-black" draggable="false">
+                            <span><span style="color: #ffffff;" id="fakeUpBtnText">Share</span>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -91,8 +102,23 @@
         });
 
         window.onload = function () {
-            generateRandomPassword(16);
+            generateRandomPassword(inputRange.value);
         };
+
+        isE2R.onchange = function () {
+            if (isE2R.checked) {
+                inputRange.max = 10;
+                inputRange.min = 2;
+                inputRange.value = 2;
+                rangeValue.innerText = inputRange.value;
+            }
+            if (!isE2R.checked) {
+                inputRange.max = 150;
+                inputRange.min = 8;
+                inputRange.value = 20;
+                rangeValue.innerText = inputRange.value;
+            }
+        }
     </script>
     <script src="assets/main.js"></script>
 
