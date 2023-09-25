@@ -1,3 +1,20 @@
+isE2R.onchange = function () {
+    if (isE2R.checked) {
+        inputRange.max = 10;
+        inputRange.min = 2;
+        inputRange.value = 4;
+        rangeValue.innerText = inputRange.value;
+        generateRandomPassword(inputRange.value);
+    }
+    if (!isE2R.checked) {
+        inputRange.max = 150;
+        inputRange.min = 8;
+        inputRange.value = 20;
+        rangeValue.innerText = inputRange.value;
+        generateRandomPassword(inputRange.value);
+    }
+}
+
 function triggerButtonById(buttonId) {
     const button = document.getElementById(buttonId);
 
