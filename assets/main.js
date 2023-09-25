@@ -60,25 +60,28 @@ function copyInnerText(id) {
     var element = document.getElementById(id);
     // 判断元素是否存在
     if (element) {
-        // 获取元素的innerHTML
         var innerText = element.innerText;
-        // 创建一个临时的textarea元素
         var textarea = document.createElement("textarea");
-        // 将innerText赋值给textarea的value
         textarea.value = innerText;
-        // 将textarea添加到文档中
         document.body.appendChild(textarea);
-        // 选中textarea的内容
         textarea.select();
-        // 复制选中的内容到剪贴板
         document.execCommand("copy");
-        // 从文档中移除textarea元素
         document.body.removeChild(textarea);
         // 返回成功信息
-        return "已复制" + id + "的innerText到剪贴板";
+        Toastify({
+            text: "Copied.",
+            duration: 1200,
+            className: "info",
+            position: "center",
+            gravity: "bottom",
+            style: {
+                background: "#414141",
+            }
+        }).showToast();
+        return 0;
     } else {
         // 返回失败信息
-        return "没有找到" + id + "对应的元素";
+        return 1;
     }
 }
 
