@@ -168,21 +168,30 @@ function generateRandomPassword(length) {
     pwdInput.innerText = password;
 }
 
-function generateRandomE2R(paramCount) {
+var charSetCache = null; // 全局变量用于缓存字符集
+
+function fetchAndCacheCharSet() {
     // 创建一个 XMLHttpRequest 对象用于从文件中获取字符集
     var xhr = new XMLHttpRequest();
-
-    // 定义字符集变量
-    var charSet = '';
 
     // 打开文件并发送请求
     xhr.open('GET', 'assets/pwdDir.txt', false); // 同步请求
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            charSet = xhr.responseText;
+            charSetCache = xhr.responseText;
         }
     };
     xhr.send();
+}
+
+function generateRandomE2R(paramCount) {
+    // 如果字符集没有被缓存，则先获取并缓存
+    if (charSetCache === null) {
+        fetchAndCacheCharSet();
+    }
+
+    // 如果字符集已经被缓存，则直接使用缓存
+    var charSet = charSetCache;
 
     var words = charSet.split('\n').map(function (word) {
         return word.trim();
@@ -196,10 +205,6 @@ function generateRandomE2R(paramCount) {
         var randomIndex = Math.floor(Math.random() * words.length);
         selectedWords.push(words[randomIndex]);
     }
-
-    // 使用 "-" 将选中的词拼接起来
     var result = selectedWords.join('-');
-
-    // 返回拼接的字符串
     return result;
 }
